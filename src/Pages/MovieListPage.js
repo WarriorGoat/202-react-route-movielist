@@ -1,8 +1,6 @@
 //Table React Component
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Table.css";
-import movies from "../Data/movies";
 
 // create two simple function components to make our table code more readable
 
@@ -19,12 +17,12 @@ const TableHeader = () => {
 };
 
 //TABLE BODY SIMPLE COMPONENT
-const TableBody = (prop) => {
+const TableBody = (props) => {
   //construct rows
   // use map to iterate over each row and wrap it in a html table row
   //register a link to take the user to the movie details page
 
-  const rows = prop.data.map((row, index) => {
+  const rows = props.data.data.map((row, index) => {
     return (
       <>
         <tr key={index}>
@@ -36,13 +34,12 @@ const TableBody = (prop) => {
       </>
     );
   });
-  //return rows wrapped in tbody
-  return <tbody>{rows}</tbody>;
+  return <tbody>{rows}</tbody>; //return rows wrapped in tbody
 };
+
 // TABLE is our main Component
-const MovieListPage = () => {
+const MovieListPage = (props) => {
   //Import movie data and assign to movieList
-  const [movieList, setMovieList] = useState(movies);
 
   return (
     <div>
@@ -51,12 +48,10 @@ const MovieListPage = () => {
       </p>
       <table>
         <TableHeader />
-        <TableBody 
-        data={movieList} />
+        <TableBody data={props} />
       </table>
     </div>
   );
 };
-// }
 
 export default MovieListPage;

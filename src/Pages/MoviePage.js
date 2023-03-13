@@ -1,6 +1,5 @@
 //Import React Components
 import { useParams } from "react-router-dom";
-import movies from "../Data/movies";
 
 //TABLE HEADER SIMPLE COMPONENT
 const TableHeader = () => {
@@ -21,31 +20,32 @@ const TableHeader = () => {
 
 //TABLE BODY SIMPLE COMPONENT
 const TableBody = (props) => {
+  console.log(props);
+
   const { index } = useParams();
-  const {data} = props;
 
   return (
     <tbody>
       <tr>
-        <td>{data[index].year} </td>
-        <td>{data[index].title}</td>
-        <td>{data[index].director}</td>
-        <td>{data[index].imdbRating} </td>
-        <td>{data[index].plot}</td>
-        <td>{data[index].actors}</td>
-        <td>{data[index].dateAdded}</td>
+        <td>{props.data.data[index].year} </td>
+        <td>{props.data.data[index].title}</td>
+        <td>{props.data.data[index].director}</td>
+        <td>{props.data.data[index].imdbRating} </td>
+        <td>{props.data.data[index].plot}</td>
+        <td>{props.data.data[index].actors}</td>
+        <td>{props.data.data[index].dateAdded}</td>
       </tr>
     </tbody>
   );
 };
 
 // MoviePage is our main Component
-const MoviePage = () => {
+const MoviePage = (props) => {
   return (
     <div>
       <table>
         <TableHeader />
-        <TableBody />
+        <TableBody data={props} />
       </table>
     </div>
   );

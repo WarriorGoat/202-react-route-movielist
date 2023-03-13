@@ -13,9 +13,9 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/"> Home </Nav.Link>
-            <Nav.Link href="/movies"> Movie List </Nav.Link>
-            <Nav.Link href="/movieform"> Add Movie </Nav.Link>
+            <Link to="/"> Home </Link>
+            <Link to="/movies"> Movie List </Link>
+            <Link to="/movies/movieform"> Add Movie </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
