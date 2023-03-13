@@ -1,95 +1,62 @@
-// import Header from "../Components/Header";
-
 //Table React Component
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Table.css";
 import movies from "../Data/movies";
-import Header from "../Components/Header"
-
-
-
 
 // create two simple function components to make our table code more readable
 
-//TABLE HEADER SIMPLE COMPONENT
+// TABLE HEADER SIMPLE COMPONENT
 const TableHeader = () => {
   return (
     <thead>
       <tr>
         <th>Year</th>
         <th>Title</th>
-        {/* <th>Director</th>
-        <th>IMDB Rating</th>
-        <th>Plot</th>
-        <th>Actors</th>
-        <th>Date Added</th>
-        <th>Delete</th> */}
       </tr>
     </thead>
   );
 };
 
 //TABLE BODY SIMPLE COMPONENT
-const TableBody = (props) => {
+const TableBody = (prop) => {
   //construct rows
   // use map to iterate over each row and wrap it in a html table row
-  //register an on click listener to remove
-  const rows = props.data.map((row, index) => {
+  //register a link to take the user to the movie details page
+
+  const rows = prop.data.map((row, index) => {
     return (
-      <tr key={index}>
-        <td> {row.year} </td>
-        <td>{row.title}</td>
-        {/* <td>{row.director}</td>
-        <td> {row.imdbRating} </td>
-        <td>{row.plot}</td>
-        <td>{row.actors}</td>
-        <td> {row.dateAdded}</td> */}
-        <td className="detailsButton">
-          <button onClick={() => props.removeMovie(index)}> Details</button>
-        </td>
-        {/* <td className="deleteButton">
-          <button onClick={() => props.removeMovie(index)}> Delete</button>
-        </td> */}
-      </tr>
+      <>
+        <tr key={index}>
+          <td> {row.year} </td>
+          <td>
+            <Link to={`/movies/${index}`}>{row.title} </Link>
+          </td>
+        </tr>
+      </>
     );
   });
   //return rows wrapped in tbody
   return <tbody>{rows}</tbody>;
 };
 // TABLE is our main Component
-const Table=() => {
+const MovieListPage = () => {
   //Import movie data and assign to movieList
-  const [movieList, setMovieList] = useState (movies)
-  
-  
-  const removeMovie = (index) => {
-    // const { movieList } = this.state;
-    // now that we've defined this.state, we can use setState to update the state
-    setMovieList({
-      // remove movie at passed in index by returning a new list excluding that character
-      movieList: movieList.filter((_, i) => {
-        return i !== index;
-      }),
-    });
-  };
+  const [movieList, setMovieList] = useState(movies);
 
-//   render() {
-    //read props passed in from App.js
-    // const { movieData, removeMovie } = this.props;
-
-    return (
-      <div>
-        <Header />
-        <table>
-          <TableHeader />
-          <TableBody 
-          data={movieList} 
-          removeMovie={removeMovie} 
-          />
-        </table>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <p className="instructions">
+        Click on the title to see the movie's details.
+      </p>
+      <table>
+        <TableHeader />
+        <TableBody 
+        data={movieList} />
+      </table>
+    </div>
+  );
+};
 // }
 
-export default Table;
+export default MovieListPage;
